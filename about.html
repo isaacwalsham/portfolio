@@ -3,32 +3,89 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About Me</title>
+  <title>About | Isaac Walsham</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
   <script defer src="script.js"></script>
 </head>
 <body>
   <header>
     <nav class="navbar">
       <div class="logo">Isaac Walsham</div>
-      <button class="toggle-btn">&#9776;</button>
+      <button class="toggle-btn" aria-label="Menu">&#9776;</button>
       <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
+        <li><a href="about.html" class="active">About</a></li>
         <li><a href="projects.html">Projects</a></li>
         <li><a href="cv.html">CV</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
     </nav>
   </header>
-  <main class="section">
-    <h1>About Me</h1>
-    <p>
-      I'm a second-year Computer Science student at the University of East Anglia, aiming for a First-Class Honours degree. I’m passionate about software development and artificial intelligence, and I enjoy building practical systems that solve real problems.
-    </p>
-    <p>
-      I’ve completed Harvard’s CS50 course and developed several academic projects using Java, Python, SQL, and PostgreSQL. I’m seeking internships in backend development, AI engineering, or full-stack software roles.
-    </p>
+
+  <main class="about-page">
+    <!-- Intro -->
+    <section class="about-intro" data-aos="fade-up">
+      <div class="container">
+        <h1>Hello! I'm Isaac 👋</h1>
+        <p class="intro-text">
+          I’m a passionate Computer Science student at the University of East Anglia, on a journey to explore the world of software engineering and AI.
+        </p>
+      </div>
+    </section>
+
+    <!-- Values and Interests -->
+    <section class="values-section" data-aos="fade-up">
+      <h2>What Drives Me</h2>
+      <div class="values-grid">
+        <div class="value-card">
+          <h3>🚀 Curiosity</h3>
+          <p>I love learning — from algorithms to new frameworks. I always want to know how things work under the hood.</p>
+        </div>
+        <div class="value-card">
+          <h3>🛠 Problem Solving</h3>
+          <p>Give me a complex bug or data challenge — that’s where I thrive. I enjoy breaking down messy problems into clean logic.</p>
+        </div>
+        <div class="value-card">
+          <h3>🌱 Growth</h3>
+          <p>I believe in continuous improvement — through side projects, online courses (like Harvard CS50), and reflection.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Career Goals -->
+    <section class="goals-section" data-aos="fade-up">
+      <h2>My Career Goals</h2>
+      <div class="accordion">
+        <button class="accordion-btn">🌐 Work in full-stack or AI engineering</button>
+        <div class="accordion-content">
+          <p>I’m aiming to become a versatile developer who can contribute across the stack and dive into intelligent systems that learn and adapt.</p>
+        </div>
+
+        <button class="accordion-btn">🧠 Keep building my portfolio</button>
+        <div class="accordion-content">
+          <p>I’m constantly creating and refining projects that reflect real-world impact, scalability, and creativity.</p>
+        </div>
+
+        <button class="accordion-btn">📍 Long-term: join a mission-driven company</button>
+        <div class="accordion-content">
+          <p>I want to use tech to make a difference — whether in healthcare, sustainability, or AI safety. I'm drawn to teams solving hard problems that matter.</p>
+        </div>
+      </div>
+    </section>
   </main>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>AOS.init();</script>
+  <script>
+    // Accordion interaction
+    document.querySelectorAll(".accordion-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        btn.classList.toggle("open");
+        const content = btn.nextElementSibling;
+        content.style.display = content.style.display === "block" ? "none" : "block";
+      });
+    });
+  </script>
 </body>
 </html>
