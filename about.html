@@ -27,65 +27,63 @@
     <!-- Intro -->
     <section class="about-intro" data-aos="fade-up">
       <div class="container">
-        <h1>Hello! I'm Isaac 👋</h1>
+        <h1>Hello! I'm Isaac</h1>
         <p class="intro-text">
-          I’m a passionate Computer Science student at the University of East Anglia, on a journey to explore the world of software engineering and AI.
+          I’m a 2nd year Computer Science student at the University of East Anglia.
         </p>
-      </div>
-    </section>
-
-    <!-- Values and Interests -->
-    <section class="values-section" data-aos="fade-up">
-      <h2>What Drives Me</h2>
-      <div class="values-grid">
-        <div class="value-card">
-          <h3>🚀 Curiosity</h3>
-          <p>I love learning — from algorithms to new frameworks. I always want to know how things work under the hood.</p>
-        </div>
-        <div class="value-card">
-          <h3>🛠 Problem Solving</h3>
-          <p>Give me a complex bug or data challenge — that’s where I thrive. I enjoy breaking down messy problems into clean logic.</p>
-        </div>
-        <div class="value-card">
-          <h3>🌱 Growth</h3>
-          <p>I believe in continuous improvement — through side projects, online courses (like Harvard CS50), and reflection.</p>
-        </div>
       </div>
     </section>
 
     <!-- Career Goals -->
     <section class="goals-section" data-aos="fade-up">
       <h2>My Career Goals</h2>
-      <div class="accordion">
-        <button class="accordion-btn">🌐 Work in full-stack or AI engineering</button>
-        <div class="accordion-content">
-          <p>I’m aiming to become a versatile developer who can contribute across the stack and dive into intelligent systems that learn and adapt.</p>
-        </div>
+      <div class="goals-content">
+        <p>
+          I'm working towards a career in AI and data-driven software. I’ve always been curious about how smart systems work — from machine learning models to how companies use data to make decisions.
+        </p>
+        <p>
+          I’m especially interested in the maths behind it all — algorithms, optimisation, data science — and how it connects with things like financial markets, automation, and predictive modelling.
+        </p>
+        <p>
+          Long term, I’d love to work in a role where I get to build or contribute to intelligent systems — whether that’s in fintech, trading tech, or even research-driven AI.
+        </p>
+      </div>
+    </section>
 
-        <button class="accordion-btn">🧠 Keep building my portfolio</button>
-        <div class="accordion-content">
-          <p>I’m constantly creating and refining projects that reflect real-world impact, scalability, and creativity.</p>
-        </div>
+    <!-- Timeline -->
+    <section class="timeline-section" data-aos="fade-up">
+      <h2>My Journey So Far</h2>
+      <div class="timeline-wrapper">
+        <ul class="timeline">
+          <li>
+            <div class="timeline-date">September 2024</div>
+            <div class="timeline-desc">Started BSc Computer Science at the University of East Anglia</div>
+          </li>
+          <li>
+            <div class="timeline-date">Summer 2025</div>
+            <div class="timeline-desc">Completed my first year and supplementary courses to deepen understanding</div>
+          </li>
+          <li>
+            <div class="timeline-date">September 2025</div>
+            <div class="timeline-desc">Applying for software and AI internships for Summer 2026 to gain industry experience</div>
+          </li>
+        </ul>
+      </div>
+    </section>
 
-        <button class="accordion-btn">📍 Long-term: join a mission-driven company</button>
-        <div class="accordion-content">
-          <p>I want to use tech to make a difference — whether in healthcare, sustainability, or AI safety. I'm drawn to teams solving hard problems that matter.</p>
-        </div>
+    <!-- Currently Learning -->
+    <section class="learning-section" data-aos="fade-up">
+      <h2>What I'm Currently Learning</h2>
+      <div class="learning-cards">
+        <div class="learning-card">🧠 Machine Learning Fundamentals</div>
+        <div class="learning-card">📈 Information Retrieval</div>
+        <div class="learning-card">💻 OOP and Java Projects</div>
+        <div class="learning-card">📊 Python for Financial Data</div>
       </div>
     </section>
   </main>
 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>AOS.init();</script>
-  <script>
-    // Accordion interaction
-    document.querySelectorAll(".accordion-btn").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        btn.classList.toggle("open");
-        const content = btn.nextElementSibling;
-        content.style.display = content.style.display === "block" ? "none" : "block";
-      });
-    });
-  </script>
 </body>
 </html>
