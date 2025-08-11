@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Projects | Isaac Walsham</title>
+  <meta name="description" content="Selected projects by Isaac Walsham — Java arcade simulation, PostgreSQL + Python exam system, and a responsive portfolio site." />
+
+  <!-- Site styles & AOS -->
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://unpkg.com" crossorigin>
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+  <script defer src="script.js"></script>
+
+  <!-- Page-specific styles (chips + timeline) -->
+  <style>
+    /* Chips */
+    .chips { display: flex; flex-wrap: wrap; gap: .5rem; }
+    .chip {
+      border: 1px solid var(--clr-border);
+      background: color-mix(in srgb, var(--clr-bg) 80%, var(--clr-surface));
+      color: var(--clr-text);
+      padding: .35rem .65rem;
+      border-radius: 999px;
+      font-size: .9rem;
+      line-height: 1;
+    }
+
+    /* Timeline */
+    .timeline {
+      position: relative;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 28px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--clr-border);
+    }
+    .tl-item {
+      position: relative;
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 1rem;
+      padding: 1rem 0;
+    }
+    .tl-dot {
+      position: relative;
+      width: 56px;
+      height: 56px;
+      display: grid;
+      place-items: center;
+    }
+    .tl-dot::before {
+      content: "";
+      position: absolute;
+      width: 14px; height: 14px; border-radius: 50%;
+      background: var(--clr-primary);
+      box-shadow: 0 0 0 6px color-mix(in srgb, var(--clr-primary) 25%, transparent);
+    }
+    .tl-card {
+      background: var(--clr-surface);
+      border: 1px solid var(--clr-border);
+      border-radius: 12px;
+      padding: 1rem 1.1rem;
+      box-shadow: 0 10px 24px rgba(0,0,0,.15);
+    }
+    .tl-title { margin: 0 0 .25rem; font-weight: 700; }
+    .tl-sub { margin: 0 0 .4rem; color: var(--clr-muted); font-size: .95rem; }
+
+    @media (max-width: 640px) {
+      .timeline::before { left: 22px; }
+      .tl-item { grid-template-columns: 44px 1fr; }
+      .tl-dot { width: 44px; height: 44px; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header>
+    <nav class="navbar" role="navigation" aria-label="Primary">
+      <div class="logo">Isaac Walsham</div>
+      <button class="toggle-btn" aria-label="Open menu" aria-expanded="false" aria-controls="primary-nav">&#9776;</button>
+      <ul id="primary-nav" class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a class="active" href="projects.html">Projects</a></li>
+        <li><a href="cv.html">CV</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="/admin">Admin</a></li>
+      </ul>
+      <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+    </nav>
+  </header>
+
+  <main id="main" class="projects">
+    <!-- Hero / Header -->
+    <section class="section" aria-labelledby="projects-title">
+      <div class="section-header" data-aos="fade-up">
+        <h1 id="projects-title">Projects</h1>
+        <p class="section-subtitle">A few things I’ve built or am building. More on my GitHub.</p>
+      </div>
+
+      <!-- Quick cards -->
+      <div class="cards" data-aos="fade-up" data-aos-delay="100">
+        <article class="card">
+          <h2>Arcade Management System</h2>
+          <p>A contactless arcade simulation with players, machines, and credits using OOP principles. For the University of East Anglia.</p>
+          <div class="chips">
+            <span class="chip">Java</span>
+            <span class="chip">OOP</span>
+            <span class="chip">File I/O</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <h2>Exam Database System</h2>
+          <p>Manage students, modules, and grades with a desktop GUI and PostgreSQL backend. For the University of East Anglia.</p>
+          <div class="chips">
+            <span class="chip">Python</span>
+            <span class="chip">PostgreSQL</span>
+            <span class="chip">SQL</span>
+            <span class="chip">Tkinter</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <h2>Portfolio Website</h2>
+          <p>The site you’re on. Fully responsive, animated, with dark/light mode and accessibility improvements.</p>
+          <div class="chips">
+            <span class="chip">HTML</span>
+            <span class="chip">CSS</span>
+            <span class="chip">JavaScript</span>
+            <span class="chip">AOS</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Project timeline -->
+    <section class="section" aria-labelledby="timeline-title">
+      <div class="section-header" data-aos="fade-up">
+        <h2 id="timeline-title">Build Timeline</h2>
+        <p class="section-subtitle">Highlights of when things were built and what I learned.</p>
+      </div>
+
+      <div class="timeline" data-aos="fade-up" data-aos-delay="150">
+        <div class="tl-item">
+          <div class="tl-dot" aria-hidden="true"></div>
+          <div class="tl-card">
+            <h3 class="tl-title">Summer 2025 — Portfolio v2</h3>
+            <p class="tl-sub">Responsive UI, animations, theme toggle</p>
+            <p>Rebuilt my personal site with a focus on accessibility, motion, and performance. Added dark/light mode and a reusable card system.</p>
+            <div class="chips">
+              <span class="chip">HTML/CSS/JS</span>
+              <span class="chip">Animation</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot" aria-hidden="true"></div>
+          <div class="tl-card">
+            <h3 class="tl-title">Spring 2025 — Exam Database System</h3>
+            <p class="tl-sub">Desktop app + PostgreSQL</p>
+            <p>Designed an exam management workflow and implemented input validation and relational queries.</p>
+            <div class="chips">
+              <span class="chip">Python</span>
+              <span class="chip">PostgreSQL</span>
+              <span class="chip">SQL</span>
+              <span class="chip">Tkinter</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot" aria-hidden="true"></div>
+          <div class="tl-card">
+            <h3 class="tl-title">Autumn 2024 — Arcade Management System</h3>
+            <p class="tl-sub">Java OOP coursework</p>
+            <p>Built an arcade simulator using classes for players and machines, with file persistence and error handling.</p>
+            <div class="chips">
+              <span class="chip">Java</span>
+              <span class="chip">OOP</span>
+              <span class="chip">File I/O</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Central GitHub link -->
+    <section class="section" data-aos="fade-up" data-aos-delay="200" style="text-align:center;">
+      <a class="btn" href="https://github.com/isaacwalsham" target="_blank" rel="noopener">View All Projects on GitHub</a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© <span id="year"></span> Isaac Walsham</p>
+  </footer>
+
+  <noscript>
+    <p style="padding:1rem; text-align:center;">JavaScript is disabled — animations are reduced.</p>
+  </noscript>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>AOS.init();</script>
+</body>
+</html>

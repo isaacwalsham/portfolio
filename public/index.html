@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Isaac Walsham — Developer Portfolio</title>
+  <meta name="description" content="Portfolio of Isaac Walsham — Computer Science student focused on software, AI and data-driven systems. Projects, skills, and contact." />
+  <meta property="og:title" content="Isaac Walsham — Developer Portfolio" />
+  <meta property="og:description" content="Projects, skills, and contact information for Isaac Walsham." />
+  <meta property="og:type" content="website" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://unpkg.com" crossorigin>
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+
+  <!-- Scripts -->
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header>
+    <nav class="navbar" role="navigation" aria-label="Primary">
+      <div class="logo">Isaac Walsham</div>
+      <button class="toggle-btn" aria-label="Open menu" aria-expanded="false" aria-controls="primary-nav">&#9776;</button>
+      <ul id="primary-nav" class="nav-links">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="cv.html">CV</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="/admin">Admin</a></li>
+      </ul>
+      <!-- Theme toggle button -->
+      <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+    </nav>
+  </header>
+
+  <main id="main" class="home">
+    <!-- Hero -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-content" data-aos="fade-up" data-aos-delay="100">
+        <img src="assets/isaacWalshamProfile.png" alt="Portrait of Isaac Walsham" class="profile-pic" />
+        <h1 id="hero-title">Hi, I'm Isaac Walsham</h1>
+        <p class="subtitle">Aspiring Software &amp; AI Engineer</p>
+        <div class="cta-group" data-aos="zoom-in" data-aos-delay="250">
+          <a href="projects.html" class="btn">View My Work</a>
+          <a href="contact.html" class="btn btn--ghost">Get in Touch</a>
+        </div>
+      </div>
+
+      <!-- Decorative moving shapes -->
+      <div class="hero-shapes" aria-hidden="true">
+        <span class="shape shape--1"></span>
+        <span class="shape shape--2"></span>
+        <span class="shape shape--3"></span>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section class="skills section" aria-labelledby="skills-title" data-aos="fade-up">
+      <div class="section-header">
+        <h2 id="skills-title">Technical Skills</h2>
+        <p class="section-subtitle">A quick snapshot of the tools and concepts I use most.</p>
+      </div>
+
+      <div class="skill-bars">
+        <div>
+          <label for="skill-web">HTML/CSS/JavaScript</label>
+          <div class="bar" aria-hidden="true"><div id="skill-web" class="fill" style="width: 92%"></div></div>
+        </div>
+        <div>
+          <label for="skill-node">Node.js &amp; SQL</label>
+          <div class="bar" aria-hidden="true"><div id="skill-node" class="fill" style="width: 85%"></div></div>
+        </div>
+        <div>
+          <label for="skill-pg">Database Architecture</label>
+          <div class="bar" aria-hidden="true"><div id="skill-pg" class="fill" style="width: 82%"></div></div>
+        </div>
+        <div>
+          <label for="skill-py">Python</label>
+          <div class="bar" aria-hidden="true"><div id="skill-py" class="fill" style="width: 65%"></div></div>
+        </div>
+        <div>
+          <label for="skill-java">Java / OOP</label>
+          <div class="bar" aria-hidden="true"><div id="skill-java" class="fill" style="width: 88%"></div></div>
+        </div>
+        <div>
+          <label for="skill-dsa">Data Structures &amp; Algorithms</label>
+          <div class="bar" aria-hidden="true"><div id="skill-dsa" class="fill" style="width: 90%"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured stats with counters -->
+<section class="stats section" aria-labelledby="stats-title" data-aos="fade-up">
+  <div class="stats-header">
+    <h2 id="stats-title">Lifetime Stats</h2>
+  </div>
+  <div class="stats-grid" data-counter>
+    <div>
+      <h3 data-count="3">0+</h3>
+      <p>Years Experience</p>
+    </div>
+    <div>
+      <h3 data-count="5">0+</h3>
+      <p>Projects Built</p>
+    </div>
+    <div>
+      <h3 data-count="9999">0</h3>
+      <p>Missed Semicolons</p>
+    </div>
+    <div>
+      <h3 data-count="542">0</h3>
+      <p>Coffees Consumed</p>
+    </div>
+  </div>
+</section>
+
+    <!-- Featured projects -->
+    <section class="section" aria-labelledby="featured-title" data-aos="fade-up">
+      <div class="section-header">
+        <h2 id="featured-title">Featured Work</h2>
+        <p class="section-subtitle">A couple of highlights — see more on the Projects page.</p>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <h3>Arcade Management System</h3>
+          <p>A contactless arcade simulation using Java and OOP principles.</p>
+          <a class="btn btn--sm" href="projects.html">Details</a>
+        </article>
+        <article class="card">
+          <h3>Exam Database System</h3>
+          <p>PostgreSQL + Python GUI for managing student exam records.</p>
+          <a class="btn btn--sm" href="projects.html">Details</a>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© <span id="year"></span> Isaac Walsham</p>
+  </footer>
+
+  <noscript>
+    <p style="padding:1rem; text-align:center;">JavaScript is disabled — animations are reduced.</p>
+  </noscript>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+</body>
+</html>

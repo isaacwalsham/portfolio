@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About | Isaac Walsham</title>
+  <meta name="description" content="Isaac Walsham — Computer Science student at the University of East Anglia. Interests in AI, finance, data science, and frontend." />
+
+  <!-- Site styles & AOS -->
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://unpkg.com" crossorigin>
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+  <script defer src="script.js"></script>
+
+  <!-- Page-specific styles (timeline + chips) -->
+  <style>
+    /* Timeline */
+    .timeline {
+      position: relative;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 28px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--clr-border);
+    }
+    .tl-item {
+      position: relative;
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 1rem;
+      padding: 1rem 0;
+    }
+    .tl-dot {
+      position: relative;
+      width: 56px;
+      height: 56px;
+      display: grid;
+      place-items: center;
+    }
+    .tl-dot::before {
+      content: "";
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--clr-primary);
+      box-shadow: 0 0 0 6px color-mix(in srgb, var(--clr-primary) 25%, transparent);
+    }
+    .tl-card {
+      background: var(--clr-surface);
+      border: 1px solid var(--clr-border);
+      border-radius: 12px;
+      padding: 1rem 1.1rem;
+      box-shadow: 0 10px 24px rgba(0,0,0,.15);
+    }
+    .tl-title {
+      margin: 0 0 .25rem;
+      font-weight: 700;
+    }
+    .tl-sub {
+      margin: 0 0 .4rem;
+      color: var(--clr-muted);
+      font-size: .95rem;
+    }
+
+    /* Chips */
+    .chips { display: flex; flex-wrap: wrap; gap: .5rem; }
+    .chip {
+      border: 1px solid var(--clr-border);
+      background: color-mix(in srgb, var(--clr-bg) 80%, var(--clr-surface));
+      color: var(--clr-text);
+      padding: .4rem .7rem;
+      border-radius: 999px;
+      font-size: .9rem;
+      line-height: 1;
+    }
+
+    /* Link buttons */
+    .link-buttons {
+      display: flex; flex-wrap: wrap; gap: .75rem;
+    }
+    .link-btn {
+      text-decoration: none;
+      border: 1px solid var(--clr-border);
+      background: linear-gradient(90deg, var(--clr-primary), var(--clr-accent));
+      color: #0a0d1a;
+      font-weight: 700;
+      padding: .7rem 1rem;
+      border-radius: 12px;
+      box-shadow: 0 10px 24px rgba(0,0,0,.2);
+    }
+    .link-btn--ghost {
+      background: transparent;
+      color: var(--clr-text);
+      border: 1px solid var(--clr-border);
+    }
+
+    @media (max-width: 640px) {
+      .timeline::before { left: 22px; }
+      .tl-item { grid-template-columns: 44px 1fr; }
+      .tl-dot { width: 44px; height: 44px; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header>
+    <nav class="navbar" role="navigation" aria-label="Primary">
+      <div class="logo">Isaac Walsham</div>
+      <button class="toggle-btn" aria-label="Open menu" aria-expanded="false" aria-controls="primary-nav">&#9776;</button>
+      <ul id="primary-nav" class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a class="active" href="about.html">About</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="cv.html">CV</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="/admin">Admin</a></li>
+      </ul>
+      <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+    </nav>
+  </header>
+
+  <main id="main" class="about">
+    <!-- Hero -->
+    <section class="hero" aria-labelledby="about-title">
+      <div class="hero-content" data-aos="fade-up" data-aos-delay="100">
+        <img src="assets/isaacWalshamProfile.png" alt="Portrait of Isaac Walsham" class="profile-pic" />
+        <h1 id="about-title">About Me</h1>
+        <p class="subtitle">Computer Science student interested in AI and Finance.</p>
+        <div class="cta-group" data-aos="zoom-in" data-aos-delay="250">
+          <a href="projects.html" class="btn btn--sm">View Projects</a>
+          <a href="contact.html" class="btn btn--ghost btn--sm">Contact</a>
+        </div>
+      </div>
+      <div class="hero-shapes" aria-hidden="true">
+        <span class="shape shape--1"></span>
+        <span class="shape shape--2"></span>
+        <span class="shape shape--3"></span>
+      </div>
+    </section>
+
+    <!-- Snapshot -->
+    <section class="section" aria-labelledby="snapshot-title">
+      <div class="section-header" data-aos="fade-up">
+        <h2 id="snapshot-title">Snapshot</h2>
+        <p class="section-subtitle">2nd year at the University of East Anglia. Modules this year include <strong>Data Science</strong> and <strong>Information Retrieval</strong>. Aiming for a summer internship in 2026.</p>
+      </div>
+
+      <div class="cards" data-aos="fade-up" data-aos-delay="100">
+        <article class="card">
+          <h3>Skills</h3>
+          <div class="chips">
+            <span class="chip">Java</span>
+            <span class="chip">Python</span>
+            <span class="chip">Database Architecture</span>
+            <span class="chip">HTML/CSS/JavaScript</span>
+            <span class="chip">Node.js</span>
+            <span class="chip">Data Structures & Algorithms</span>
+          </div>
+        </article>
+        <article class="card">
+          <h3>Interests</h3>
+          <div class="chips">
+            <span class="chip">AI & ML</span>
+            <span class="chip">Data Science</span>
+            <span class="chip">Financial Markets</span>
+            <span class="chip">UI/UX</span>
+            <span class="chip">Fitness</span>
+          </div>
+        </article>
+        <article class="card">
+          <h3>Links</h3>
+          <div class="link-buttons">
+            <a class="link-btn" href="https://github.com/isaacwalsham" target="_blank" rel="noopener">GitHub</a>
+            <a class="link-btn link-btn--ghost" href="mailto:isaac.walsham@gmail.com">Email</a>
+            <a class="link-btn link-btn--ghost" href="https://www.linkedin.com/in/isaacwalsham" target="_blank" rel="noopener">LinkedIn</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Timeline -->
+    <section class="section" aria-labelledby="timeline-title">
+      <div class="section-header" data-aos="fade-up">
+        <h2 id="timeline-title">My Journey</h2>
+        <p class="section-subtitle">A quick timeline of milestones so far.</p>
+      </div>
+
+      <div class="timeline" data-aos="fade-up" data-aos-delay="150">
+        <!-- 2026 target -->
+        <div class="tl-item">
+          <div class="tl-dot" aria-hidden="true"></div>
+          <div class="tl-card">
+            <h3 class="tl-title">Summer 2026 — Internship Goal</h3>
+            <p class="tl-sub">Applications in progress</p>
+            <p>Working towards a summer internship focused on software engineering, AI, or data-driven systems.</p>
+          </div>
+        </div>
+
+        <!-- Summer 2025 -->
+        <div class="tl-item">
+          <div class="tl-dot" aria-hidden="true"></div>
+          <div class="tl-card">
+            <h3 class="tl-title">Summer 2025 — CS50 & Portfolio</h3>
+            <p class="tl-sub">Harvard CS50: Introduction to Computer Science</p>
+            <p>Completed Harvard CS50, and built my first portfolio website.</p>
+          </div>
+        </div>
+
+        <!-- Sep 2024 -->
+        <div class="tl-item">
+          <div class="tl-dot" aria-hidden="true"></div>
+          <div class="tl-card">
+            <h3 class="tl-title">September 2024 — Started BSc CS</h3>
+            <p class="tl-sub">University of East Anglia</p>
+            <p>Began my Computer Science degree. Current modules include Data Science and Information Retrieval.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© <span id="year"></span> Isaac Walsham</p>
+  </footer>
+
+  <noscript>
+    <p style="padding:1rem; text-align:center;">JavaScript is disabled — animations are reduced.</p>
+  </noscript>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script> AOS.init(); </script>
+</body>
+</html>
