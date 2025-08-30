@@ -6,71 +6,26 @@
   <title>Contact — Isaac Walsham</title>
   <meta name="description" content="Get in touch with Isaac Walsham — send a message using the contact form." />
 
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="/style.css" />
   <link rel="preconnect" href="https://unpkg.com" crossorigin>
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
-  <script defer src="script.js"></script>
 
-  <!-- Page-scoped styles -->
   <style>
     .contact-wrap { max-width: 760px; margin: 0 auto; }
     .contact-form { display: grid; gap: 1rem; }
     .form-row { display: grid; gap: .9rem; }
     .form-row.two { grid-template-columns: 1fr 1fr; }
     @media (max-width: 640px){ .form-row.two { grid-template-columns: 1fr; } }
-
-    .contact-form input,
-    .contact-form textarea,
-    .contact-form select {
-      width: 100%;
-      background: transparent;
-      color: var(--clr-text);
-      border: 1px solid var(--clr-border);
-      border-radius: 10px;
-      padding: .7rem .9rem;
-    }
-    .contact-form input[type="file"] { padding: .6rem; }
-
-    /* FIX: keep consent text inside the card */
-    .consent-row {
-      display: grid;
-      grid-template-columns: auto 1fr;
-      align-items: start;
-      gap: .7rem;
-      word-break: break-word;
-    }
-    .consent-row input { margin-top: .2rem; }
-    .consent-row label {
-      color: var(--clr-muted);
-      font-size: .95rem;
-      line-height: 1.4;
-      max-width: 100%;
-    }
-
-    .hint { color: var(--clr-muted); font-size: .9rem; }
-    .status {
-      display: none;
-      margin-top: 1rem;
-      padding: .9rem 1rem;
-      border-radius: 10px;
-      border: 1px solid var(--clr-border);
-      background: color-mix(in srgb, var(--clr-bg) 82%, var(--clr-surface));
-      word-break: break-word;
-    }
-    .status.show { display: block; }
-    .status.ok { border-color: #1cb04a; }
-    .status.err { border-color: #d33; }
-    .actions { display: flex; gap: .8rem; align-items: center; flex-wrap: wrap; }
-    .invalid { border-color: #d33 !important; }
+    .contact-form input,.contact-form textarea { width:100%; padding:.7rem; border-radius:10px; border:1px solid var(--clr-border); background:transparent; color:var(--clr-text); }
+    .consent-row { display:grid; grid-template-columns:auto 1fr; gap:.6rem; align-items:flex-start; }
+    .hint { color:var(--clr-muted); font-size:.9rem; }
+    .actions { display:flex; gap:.8rem; align-items:center; flex-wrap:wrap; }
   </style>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
-
   <header>
     <nav class="navbar" role="navigation" aria-label="Primary">
       <div class="logo">Isaac Walsham</div>
-      <button class="toggle-btn" aria-label="Open menu" aria-expanded="false" aria-controls="primary-nav">&#9776;</button>
       <ul id="primary-nav" class="nav-links">
         <li><a href="/">Home</a></li>
         <li><a href="/about">About</a></li>
@@ -79,7 +34,6 @@
         <li><a href="/contact" class="active">Contact</a></li>
         <li><a href="/admin">Admin</a></li>
       </ul>
-      <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
     </nav>
   </header>
 
@@ -90,16 +44,18 @@
     </div>
 
     <div class="contact-wrap" data-aos="fade-up" data-aos-delay="100">
-      <form id="contactForm"
+      <!-- Netlify Forms: name + data-netlify attribute required -->
+      <form name="contact"
             method="POST"
+            data-netlify="true"
+            data-netlify-honeypot="bot-field"
             enctype="multipart/form-data"
-            class="card contact-form"
-            autocomplete="off" novalidate>
+            class="card contact-form">
 
-        <input type="hidden" name="sendToEmail" value="isaac.walsham@gmail.com" />
+        <!-- Netlify needs this hidden field -->
+        <input type="hidden" name="form-name" value="contact" />
         <!-- Honeypot -->
-        <input type="text" name="company" tabindex="-1" aria-hidden="true"
-               style="position:absolute;left:-9999px;height:0;width:0;opacity:0;" />
+        <input type="text" name="bot-field" style="display:none" />
 
         <div class="form-row two">
           <div>
@@ -108,35 +64,29 @@
           </div>
           <div>
             <label for="email">Email</label>
-            <input id="email" name="email" type="email" inputmode="email" required placeholder="you@example.com" />
+            <input id="email" name="email" type="email" required placeholder="you@example.com" />
           </div>
         </div>
 
         <div class="form-row">
-          <div>
-            <label for="subject">Subject</label>
-            <input id="subject" name="subject" required placeholder="How can I help?" />
-          </div>
+          <label for="subject">Subject</label>
+          <input id="subject" name="subject" required placeholder="How can I help?" />
         </div>
 
         <div class="form-row">
-          <div>
-            <label for="message">Message</label>
-            <textarea id="message" name="message" rows="6" required placeholder="Type your message here..."></textarea>
-          </div>
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="6" required placeholder="Type your message here..."></textarea>
         </div>
 
         <div class="form-row">
-          <div>
-            <label for="cv">Attach file (optional)</label>
-            <input id="cv" name="attachment" type="file" accept=".pdf,.doc,.docx" />
-            <p class="hint">Accepted: PDF, DOC, DOCX · Max 5MB</p>
-          </div>
+          <label for="cv">Attach file (optional)</label>
+          <input id="cv" name="attachment" type="file" accept=".pdf,.doc,.docx" />
+          <p class="hint">Accepted: PDF, DOC, DOCX · Max 5MB</p>
         </div>
 
         <div class="form-row">
           <div class="consent-row">
-            <input type="checkbox" id="consent" required />
+            <input type="checkbox" id="consent" name="consent" required />
             <label for="consent">I agree to be contacted at the email provided for this enquiry.</label>
           </div>
         </div>
@@ -146,7 +96,7 @@
           <span class="hint">I’ll usually reply within 1–2 business days.</span>
         </div>
 
-        <div id="formStatus" class="status" role="status" aria-live="polite"></div>
+        <!-- Netlify will redirect/return here after POST; you can add a thank-you page later -->
       </form>
     </div>
   </main>
@@ -155,77 +105,8 @@
     <p>© <span id="year"></span> Isaac Walsham</p>
   </footer>
 
-  <noscript>
-    <p style="padding:1rem; text-align:center;">JavaScript is disabled — the form will submit via a normal page load.</p>
-  </noscript>
-
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>AOS.init();</script>
-
-  <!-- Page logic: AJAX submit + inline validation -->
-  <script>
-    (function () {
-      const form = document.getElementById('contactForm');
-      const statusEl = document.getElementById('formStatus');
-      const fields = ['name','email','subject','message'];
-
-      const setInvalid = (id, bad) => {
-        const el = document.getElementById(id);
-        if (!el) return;
-        el.classList.toggle('invalid', !!bad);
-        el.setAttribute('aria-invalid', bad ? 'true' : 'false');
-      };
-      const showStatus = (msg, ok) => {
-        statusEl.textContent = msg;
-        statusEl.className = 'status show ' + (ok ? 'ok' : 'err');
-      };
-
-      form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-
-        // Honeypot
-        if ((form.querySelector('input[name="company"]').value || '').trim() !== '') return;
-
-        // Validate
-        let valid = true;
-        fields.forEach(id => {
-          const v = document.getElementById(id).value.trim();
-          const bad = v.length === 0;
-          setInvalid(id, bad);
-          if (bad) valid = false;
-        });
-        const email = document.getElementById('email').value.trim();
-        const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
-        if (!emailOk) { setInvalid('email', true); valid = false; }
-        if (!document.getElementById('consent').checked) valid = false;
-
-        const file = document.getElementById('cv')?.files?.[0];
-        if (file && file.size > 5 * 1024 * 1024) {
-          showStatus('File too large. Please keep it under 5MB.', false);
-          return;
-        }
-        if (!valid) {
-          showStatus('Please correct the highlighted fields.', false);
-          return;
-        }
-
-        const data = new FormData(form);
-        try {
-          const res = await fetch('/api/contact', { method: 'POST', body: data });
-          const out = await res.json().catch(() => ({}));
-          if (res.ok && out.ok) {
-            setInvalid('email', false);
-            form.reset();
-            fields.forEach(id => setInvalid(id, false));
-            showStatus('Thanks! Your message was sent successfully. I’ll get back to you soon.', true);
-          } else {
-            showStatus(out.error || 'Unable to send right now.', false);
-          }
-        } catch {
-          showStatus('Network error. Please try again in a moment.', false);
-        }
-      });
-    })();
-  </script>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
