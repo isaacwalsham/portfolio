@@ -3,149 +3,46 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Admin — Messages</title>
+  <title>Admin Login</title>
   <link rel="stylesheet" href="/style.css"/>
   <style>
-    body { background: var(--clr-bg); color: var(--clr-text); font-family: Inter, system-ui, sans-serif; }
-    header { padding: 1rem; }
-    .wrap { max-width: 1100px; margin: 2.5rem auto; padding: 1rem; }
-    .card { background: var(--clr-surface); border: 1px solid var(--clr-border); border-radius: 12px; padding: 1rem; }
-    .login-grid { max-width:420px; margin: 2rem auto; }
-    .login-grid input { width: 100%; padding: .7rem; border-radius: 8px; border: 1px solid var(--clr-border); background: transparent; color: var(--clr-text); }
-    .btn { background: #6c4eff; color:#fff; border:0; padding:.6rem .9rem; border-radius:8px; cursor:pointer; }
-    .muted { color:var(--clr-muted); font-size:.9rem; }
-    .table { width:100%; border-collapse:collapse; margin-top:1rem; }
-    .table th, .table td { padding:.6rem .8rem; border-bottom:1px solid rgba(255,255,255,0.03); text-align:left; vertical-align:top; font-size:0.95rem; }
-    .topbar { display:flex; justify-content:space-between; gap:12px; align-items:center; }
-    .card small { color: var(--clr-muted); }
-    .hidden { display:none; }
-    .muted-link { color:var(--clr-muted); text-decoration:none; }
-    pre { white-space:pre-wrap; word-break:break-word; }
+    .login-wrap { max-width: 420px; margin: 10vh auto; padding: 2rem; }
+    .login-card { border: 1px solid var(--clr-border); background: var(--clr-surface); border-radius: 12px; padding: 1.5rem; }
+    .login-card h1 { margin: 0 0 1rem; text-align:center; }
+    .login-card form { display: grid; gap: .8rem; }
+    .login-card input { width: 100%; background: transparent; color: var(--clr-text);
+      border: 1px solid var(--clr-border); border-radius: 10px; padding: .7rem .9rem; }
+    .login-card button { margin-top: .5rem; }
+    .muted { color: var(--clr-muted); text-align:center; margin-top:.75rem; font-size:.95rem; }
   </style>
 </head>
 <body>
+  <!-- Navigation (matches your site) -->
   <header>
     <nav class="navbar" role="navigation" aria-label="Primary">
-      <div class="logo">Isaac Walsham — Admin</div>
+      <div class="logo">Isaac Walsham</div>
       <ul class="nav-links">
-        <li><a href="/" class="muted-link">Back to site</a></li>
+        <li><a href="/">Home</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/projects">Projects</a></li>
+        <li><a href="/cv">CV</a></li>
+        <li><a href="/contact">Contact</a></li>
+        <li><a href="/admin" class="active">Admin</a></li>
       </ul>
+      <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
     </nav>
   </header>
 
-  <main class="wrap">
-    <section id="loginSection" class="card login-grid">
-      <h2>Admin Login</h2>
-      <form id="loginForm">
-        <input name="username" id="loginUser" placeholder="Username" autocomplete="username" required />
-        <div style="height:.6rem;"></div>
-        <input name="password" id="loginPass" type="password" placeholder="Password" autocomplete="current-password" required />
-        <div style="height:.8rem;"></div>
+  <main class="login-wrap">
+    <div class="login-card">
+      <h1>Admin Login</h1>
+      <form method="post" action="/admin/login">
+        <input type="text" name="username" placeholder="Username" autocomplete="username" required />
+        <input type="password" name="password" placeholder="Password" autocomplete="current-password" required />
         <button class="btn" type="submit">Sign in</button>
-        <div style="height:.6rem;"></div>
-        <p class="muted">This login talks to serverless functions — credentials are only checked server-side.</p>
       </form>
-    </section>
-
-    <section id="panel" class="hidden">
-      <div class="topbar">
-        <div>
-          <h2 style="margin:0">Contact messages</h2>
-          <small class="muted">Secure admin dashboard — messages are stored in Netlify Forms.</small>
-        </div>
-        <div>
-          <button id="logoutBtn" class="btn">Log out</button>
-        </div>
-      </div>
-
-      <div class="card" style="margin-top:1rem;">
-        <div id="messagesContainer">Loading messages…</div>
-      </div>
-    </section>
+      <p class="muted">You’ll stay signed in for this session.</p>
+    </div>
   </main>
-
-  <script>
-    async function doFetch(url, opts = {}) {
-      // include credentials so cookie-based session is sent/received
-      opts.credentials = 'include';
-      const res = await fetch(url, opts);
-      const text = await res.text();
-      let json;
-      try { json = JSON.parse(text); } catch(e) { json = null; }
-      return { res, json, text };
-    }
-
-    const loginForm = document.getElementById('loginForm');
-    const loginSection = document.getElementById('loginSection');
-    const panel = document.getElementById('panel');
-    const messagesContainer = document.getElementById('messagesContainer');
-    const logoutBtn = document.getElementById('logoutBtn');
-
-    loginForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const body = {
-        username: document.getElementById('loginUser').value.trim(),
-        password: document.getElementById('loginPass').value
-      };
-      const { res, json } = await doFetch('/.netlify/functions/admin-login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body)
-      });
-      if (res.ok && json && json.ok) {
-        showPanel();
-      } else {
-        alert((json && json.error) || 'Login failed');
-      }
-    });
-
-    logoutBtn.addEventListener('click', async () => {
-      await doFetch('/.netlify/functions/admin-logout', { method: 'POST' });
-      location.reload();
-    });
-
-    async function loadMessages() {
-      messagesContainer.innerHTML = 'Loading messages…';
-      const { res, json } = await doFetch('/.netlify/functions/forms-list');
-      if (!res.ok || !json || !json.ok) {
-        messagesContainer.innerHTML = '<div class="muted">Unable to load (not authorised or no messages).</div>';
-        return;
-      }
-      const items = json.items || [];
-      if (!items.length) {
-        messagesContainer.innerHTML = '<div class="muted">No messages yet.</div>';
-        return;
-      }
-      const rows = items.map(i => {
-        const att = i.file ? `<a href="${i.file}" target="_blank" rel="noopener">Attachment</a>` : '—';
-        return `<tr>
-          <td style="width:85px;"><small>${new Date(i.created_at).toLocaleString()}</small></td>
-          <td style="width:220px;"><strong>${escapeHtml(i.name || '')}</strong><br><small>${escapeHtml(i.email || '')}</small></td>
-          <td style="max-width:480px;"><strong>${escapeHtml(i.subject || '')}</strong><div style="margin-top:.5rem;"><pre>${escapeHtml(i.message || '')}</pre></div></td>
-          <td style="width:90px">${att}</td>
-        </tr>`;
-      }).join('');
-      messagesContainer.innerHTML = `<table class="table"><thead><tr><th>Date</th><th>From</th><th>Message</th><th>Attachment</th></tr></thead><tbody>${rows}</tbody></table>`;
-    }
-
-    function escapeHtml(s) {
-      return String(s || '').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;');
-    }
-
-    async function checkSession() {
-      // Try to fetch list — if 200 we are logged in
-      const { res } = await doFetch('/.netlify/functions/forms-list');
-      if (res.ok) showPanel(); // loads messages inside
-    }
-
-    function showPanel() {
-      loginSection.classList.add('hidden');
-      panel.classList.remove('hidden');
-      loadMessages();
-    }
-
-    // On load, check if there's a session cookie and auto-load
-    checkSession();
-  </script>
 </body>
 </html>
