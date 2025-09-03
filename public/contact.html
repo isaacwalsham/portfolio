@@ -31,7 +31,6 @@
     }
     .contact-form input[type="file"] { padding: .6rem; }
 
-    /* FIX: keep consent text inside the card */
     .consent-row {
       display: grid;
       grid-template-columns: auto 1fr;
@@ -57,11 +56,7 @@
       background: color-mix(in srgb, var(--clr-bg) 82%, var(--clr-surface));
       word-break: break-word;
     }
-    .status.show { display: block; }
-    .status.ok { border-color: #1cb04a; }
-    .status.err { border-color: #d33; }
     .actions { display: flex; gap: .8rem; align-items: center; flex-wrap: wrap; }
-    .invalid { border-color: #d33 !important; }
   </style>
 </head>
 <body>
@@ -90,16 +85,23 @@
     </div>
 
     <div class="contact-wrap" data-aos="fade-up" data-aos-delay="100">
-      <form id="contactForm"
-            method="POST"
-            enctype="multipart/form-data"
-            class="card contact-form"
-            autocomplete="off" novalidate>
+      <!-- Netlify Forms: key attributes are name, method=POST, data-netlify, netlify-honeypot, and hidden form-name -->
+      <form
+        name="contact"
+        method="POST"
+        action="/success.html"
+        data-netlify="true"
+        netlify-honeypot="bot-field"
+        enctype="multipart/form-data"
+        class="card contact-form"
+        autocomplete="off">
 
-        <input type="hidden" name="sendToEmail" value="isaac.walsham@gmail.com" />
-        <!-- Honeypot -->
-        <input type="text" name="company" tabindex="-1" aria-hidden="true"
-               style="position:absolute;left:-9999px;height:0;width:0;opacity:0;" />
+        <!-- Netlify requires form-name to match the form's name -->
+        <input type="hidden" name="form-name" value="contact" />
+        <!-- Honeypot (hidden spam trap) -->
+        <p style="display:none">
+          <label>Don’t fill this out: <input name="bot-field" /></label>
+        </p>
 
         <div class="form-row two">
           <div>
@@ -146,6 +148,7 @@
           <span class="hint">I’ll usually reply within 1–2 business days.</span>
         </div>
 
+        <!-- Status area not needed for Netlify’s native post (kept for layout consistency) -->
         <div id="formStatus" class="status" role="status" aria-live="polite"></div>
       </form>
     </div>
@@ -161,71 +164,5 @@
 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>AOS.init();</script>
-
-  <!-- Page logic: AJAX submit + inline validation -->
-  <script>
-    (function () {
-      const form = document.getElementById('contactForm');
-      const statusEl = document.getElementById('formStatus');
-      const fields = ['name','email','subject','message'];
-
-      const setInvalid = (id, bad) => {
-        const el = document.getElementById(id);
-        if (!el) return;
-        el.classList.toggle('invalid', !!bad);
-        el.setAttribute('aria-invalid', bad ? 'true' : 'false');
-      };
-      const showStatus = (msg, ok) => {
-        statusEl.textContent = msg;
-        statusEl.className = 'status show ' + (ok ? 'ok' : 'err');
-      };
-
-      form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-
-        // Honeypot
-        if ((form.querySelector('input[name="company"]').value || '').trim() !== '') return;
-
-        // Validate
-        let valid = true;
-        fields.forEach(id => {
-          const v = document.getElementById(id).value.trim();
-          const bad = v.length === 0;
-          setInvalid(id, bad);
-          if (bad) valid = false;
-        });
-        const email = document.getElementById('email').value.trim();
-        const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
-        if (!emailOk) { setInvalid('email', true); valid = false; }
-        if (!document.getElementById('consent').checked) valid = false;
-
-        const file = document.getElementById('cv')?.files?.[0];
-        if (file && file.size > 5 * 1024 * 1024) {
-          showStatus('File too large. Please keep it under 5MB.', false);
-          return;
-        }
-        if (!valid) {
-          showStatus('Please correct the highlighted fields.', false);
-          return;
-        }
-
-        const data = new FormData(form);
-        try {
-          const res = await fetch('/api/contact', { method: 'POST', body: data });
-          const out = await res.json().catch(() => ({}));
-          if (res.ok && out.ok) {
-            setInvalid('email', false);
-            form.reset();
-            fields.forEach(id => setInvalid(id, false));
-            showStatus('Thanks! Your message was sent successfully. I’ll get back to you soon.', true);
-          } else {
-            showStatus(out.error || 'Unable to send right now.', false);
-          }
-        } catch {
-          showStatus('Network error. Please try again in a moment.', false);
-        }
-      });
-    })();
-  </script>
 </body>
 </html>
