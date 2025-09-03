@@ -1,0 +1,5 @@
+node_modules
+uploads
+contact_messages.db
+.env
+.DS_Store

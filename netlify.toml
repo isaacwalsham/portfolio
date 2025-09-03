@@ -1,0 +1,20 @@
+[build]
+  command = ""
+  publish = "public"
+
+# Keep the pretty /admin URL for your static login page
+[[redirects]]
+  from = "/admin"
+  to = "/admin.html"
+  status = 200
+
+# Proxy API and admin backend routes to Render
+[[redirects]]
+  from = "/api/*"
+  to = "https://api.isaacwalsham.com/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/admin/*"
+  to = "https://api.isaacwalsham.com/admin/:splat"
+  status = 200
