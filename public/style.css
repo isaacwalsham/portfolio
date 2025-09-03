@@ -187,6 +187,40 @@ header {
 }
 .contact-form input::placeholder, .contact-form textarea::placeholder { color: var(--clr-muted); }
 
+/* Contact page layout & centering fixes */
+.contact-section .card.contact-form,
+form.contact-form {
+  max-width: 900px;
+  width: 100%;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+form.contact-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+form.contact-form label { grid-column: span 2; }
+form.contact-form textarea { grid-column: 1 / -1; }
+form.contact-form button { grid-column: 1 / -1; }
+
+/* Consent row alignment */
+.contact-form .consent-row {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.6rem;
+  align-items: start;
+}
+.contact-form .consent-row input[type="checkbox"] { margin-top: 0.2rem; }
+
+/* Single column on narrower viewports for consistency */
+@media (max-width: 980px) {
+  form.contact-form { grid-template-columns: 1fr; }
+  form.contact-form label,
+  form.contact-form textarea,
+  form.contact-form button { grid-column: 1 / -1; }
+}
+
 .site-footer {
   text-align: center; padding: 1rem;
   background: linear-gradient(180deg, color-mix(in srgb, var(--clr-bg) 70%, transparent), var(--clr-bg));
