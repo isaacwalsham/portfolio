@@ -4,7 +4,7 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>Admin Login</title>
-  <link rel="stylesheet" href="/style.css"/>
+  <link rel="stylesheet" href="./style.css"/>
   <style>
     .login-wrap { max-width: 420px; margin: 10vh auto; padding: 2rem; }
     .login-card { border: 1px solid var(--clr-border); background: var(--clr-surface); border-radius: 12px; padding: 1.5rem; }
@@ -15,19 +15,19 @@
     .login-card button { margin-top: .5rem; }
     .muted { color: var(--clr-muted); text-align:center; margin-top:.75rem; font-size:.95rem; }
   </style>
+  <script defer src="./script.js"></script>
 </head>
 <body>
-  <!-- Navigation (matches your site) -->
   <header>
     <nav class="navbar" role="navigation" aria-label="Primary">
       <div class="logo">Isaac Walsham</div>
       <ul class="nav-links">
-        <li><a href="/">Home</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="/projects">Projects</a></li>
-        <li><a href="/cv">CV</a></li>
-        <li><a href="/contact">Contact</a></li>
-        <li><a href="/admin" class="active">Admin</a></li>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="cv.html">CV</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="admin.html" class="active">Admin</a></li>
       </ul>
       <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
     </nav>
@@ -41,7 +41,6 @@
         <input type="password" name="password" placeholder="Password" autocomplete="current-password" required />
         <button class="btn" type="submit">Sign in</button>
       </form>
-      <p class="muted">You’ll stay signed in for this session.</p>
     </div>
   </main>
 </body>

@@ -4,18 +4,32 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Isaac Walsham — Developer Portfolio</title>
-  <meta name="description" content="Portfolio of Isaac Walsham — Computer Science student focused on software, AI and data-driven systems. Projects, skills, and contact." />
+  <meta name="description" content="Portfolio of Isaac Walsham — software, AI and data-driven systems. Projects, skills, and contact." />
   <meta property="og:title" content="Isaac Walsham — Developer Portfolio" />
   <meta property="og:description" content="Projects, skills, and contact information for Isaac Walsham." />
   <meta property="og:type" content="website" />
 
-  <!-- Styles -->
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="./style.css" />
   <link rel="preconnect" href="https://unpkg.com" crossorigin>
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
 
-  <!-- Scripts -->
-  <script defer src="script.js"></script>
+  <script defer src="./script.js"></script>
+  <style>
+    .home .section { padding: 1.5rem 1rem; }
+    .home .section .section-header { margin-bottom: 0.75rem; }
+    .home .section .section-header h2 { margin: 0 0 .4rem; }
+
+    .home .skills.section { padding-bottom: 1.75rem; }
+    .home .stats.section { padding-top: 0.75rem; }
+
+    .home .section[aria-labelledby="featured-title"] { padding-top: 1rem; }
+
+    @media (min-width: 1024px) {
+      .home .section { padding: 1.75rem 1rem; }
+      .home .skills.section { padding-bottom: 1.5rem; }
+      .home .stats.section { padding-top: 0.5rem; }
+    }
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -30,9 +44,8 @@
         <li><a href="projects.html">Projects</a></li>
         <li><a href="cv.html">CV</a></li>
         <li><a href="contact.html">Contact</a></li>
-        <li><a href="/admin">Admin</a></li>
+        <li><a href="admin.html">Admin</a></li>
       </ul>
-      <!-- Theme toggle button -->
       <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
     </nav>
   </header>
@@ -50,7 +63,6 @@
         </div>
       </div>
 
-      <!-- Decorative moving shapes -->
       <div class="hero-shapes" aria-hidden="true">
         <span class="shape shape--1"></span>
         <span class="shape shape--2"></span>
@@ -93,32 +105,18 @@
       </div>
     </section>
 
-    <!-- Featured stats with counters -->
-<section class="stats section" aria-labelledby="stats-title" data-aos="fade-up">
-  <div class="stats-header">
-    <h2 id="stats-title">Lifetime Stats</h2>
-  </div>
-  <div class="stats-grid" data-counter>
-    <div>
-      <h3 data-count="3">0+</h3>
-      <p>Years Experience</p>
-    </div>
-    <div>
-      <h3 data-count="5">0+</h3>
-      <p>Projects Built</p>
-    </div>
-    <div>
-      <h3 data-count="9999">0</h3>
-      <p>Missed Semicolons</p>
-    </div>
-    <div>
-      <h3 data-count="542">0</h3>
-      <p>Coffees Consumed</p>
-    </div>
-  </div>
-</section>
+    <section class="stats section" aria-labelledby="stats-title" data-aos="fade-up">
+      <div class="stats-header">
+        <h2 id="stats-title">Lifetime Stats</h2>
+      </div>
+      <div class="stats-grid" data-counter>
+        <div><h3 data-count="3">0+</h3><p>Years Experience</p></div>
+        <div><h3 data-count="5">0+</h3><p>Projects Built</p></div>
+        <div><h3 data-count="9999">0</h3><p>Missed Semicolons</p></div>
+        <div><h3 data-count="542">0</h3><p>Coffees Consumed</p></div>
+      </div>
+    </section>
 
-    <!-- Featured projects -->
     <section class="section" aria-labelledby="featured-title" data-aos="fade-up">
       <div class="section-header">
         <h2 id="featured-title">Featured Work</h2>
@@ -148,8 +146,6 @@
   </noscript>
 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script>
-    AOS.init();
-  </script>
+  <script>AOS.init();</script>
 </body>
 </html>

@@ -6,15 +6,12 @@
   <title>About | Isaac Walsham</title>
   <meta name="description" content="Isaac Walsham — Computer Science student at the University of East Anglia. Interests in AI, finance, data science, and frontend." />
 
-  <!-- Site styles & AOS -->
   <link rel="stylesheet" href="style.css" />
   <link rel="preconnect" href="https://unpkg.com" crossorigin>
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
   <script defer src="script.js"></script>
 
-  <!-- Page-specific styles (timeline + chips) -->
   <style>
-    /* Timeline */
     .timeline {
       position: relative;
       max-width: 900px;
@@ -70,7 +67,6 @@
       font-size: .95rem;
     }
 
-    /* Chips */
     .chips { display: flex; flex-wrap: wrap; gap: .5rem; }
     .chip {
       border: 1px solid var(--clr-border);
@@ -82,7 +78,6 @@
       line-height: 1;
     }
 
-    /* Link buttons */
     .link-buttons {
       display: flex; flex-wrap: wrap; gap: .75rem;
     }
@@ -106,6 +101,24 @@
       .timeline::before { left: 22px; }
       .tl-item { grid-template-columns: 44px 1fr; }
       .tl-dot { width: 44px; height: 44px; }
+    }
+
+    .about .section { padding: 1.75rem 1rem; }
+    .about .section-header { margin-bottom: 0.75rem; }
+    .about .section-header h2 { margin: 0 0 .4rem; }
+
+    /* Reduce spacing between hero and snapshot */
+    .about .hero { padding-bottom: 1.25rem; }
+    .about .snapshot.section { padding-top: 1.25rem; }
+
+    /* Timeline section spacing */
+    .about .timeline.section { padding-top: 1.25rem; }
+
+    @media (min-width: 1024px) {
+      .about .section { padding: 2rem 1.5rem; }
+      .about .hero { padding-bottom: 1.5rem; }
+      .about .snapshot.section { padding-top: 1.5rem; }
+      .about .timeline.section { padding-top: 1.5rem; }
     }
   </style>
 </head>
@@ -205,7 +218,6 @@
           </div>
         </div>
 
-        <!-- Summer 2025 -->
         <div class="tl-item">
           <div class="tl-dot" aria-hidden="true"></div>
           <div class="tl-card">
@@ -215,7 +227,6 @@
           </div>
         </div>
 
-        <!-- Sep 2024 -->
         <div class="tl-item">
           <div class="tl-dot" aria-hidden="true"></div>
           <div class="tl-card">
