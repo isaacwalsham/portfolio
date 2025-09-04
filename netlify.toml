@@ -2,8 +2,13 @@
   command = ""
   publish = "public"
 
-# Optional: keep pretty /admin URL if you ever link to it
 [[redirects]]
   from = "/admin"
   to = "/admin.html"
   status = 200
+
+[[redirects]]
+  from = "http://*"
+  to = "https://isaacwalsham.com/:splat"
+  status = 301
+  force = true
