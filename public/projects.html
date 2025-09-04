@@ -6,13 +6,13 @@
   <title>Projects | Isaac Walsham</title>
   <meta name="description" content="Selected projects by Isaac Walsham — university and personal builds including an arcade simulator, exam database, Card IQ, and client landing pages." />
 
-  <!-- Site styles & AOS -->
+  <link rel="icon" type="image/png" href="assets/isaacwalshamfavicon.png" />
+
   <link rel="stylesheet" href="./style.css" />
   <link rel="preconnect" href="https://unpkg.com" crossorigin>
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
   <script defer src="./script.js"></script>
 
-  <!-- Page-specific styles (chips + timeline) -->
   <style>
     /* Chips */
     .chips { display: flex; flex-wrap: wrap; gap: .5rem; }
@@ -26,7 +26,6 @@
       line-height: 1;
     }
 
-    /* Timeline */
     .timeline {
       position: relative;
       max-width: 960px;
@@ -79,7 +78,6 @@
       .tl-dot { width: 44px; height: 44px; }
     }
 
-    /* --- Projects page spacing overrides (page-scoped) --- */
     .projects .section { padding: 1.25rem 1rem; }
     .projects .section-header { margin-bottom: 0.75rem; }
     .projects .section-header h1,
@@ -112,7 +110,6 @@
   </header>
 
   <main id="main" class="projects">
-    <!-- Page Header -->
     <section class="section" aria-labelledby="projects-title">
       <div class="section-header" data-aos="fade-up">
         <h1 id="projects-title">Projects</h1>
@@ -120,7 +117,6 @@
       </div>
     </section>
 
-    <!-- Personal Projects -->
     <section class="section" aria-labelledby="personal-title">
       <div class="section-header" data-aos="fade-up">
         <h2 id="personal-title">Personal Projects</h2>
@@ -167,7 +163,6 @@
       </div>
     </section>
 
-    <!-- University Projects -->
     <section class="section" aria-labelledby="uni-title">
       <div class="section-header" data-aos="fade-up">
         <h2 id="uni-title">University Projects</h2>
@@ -198,7 +193,6 @@
       </div>
     </section>
 
-    <!-- Build Timeline (kept as-is for now) -->
     <section class="section" aria-labelledby="timeline-title">
       <div class="section-header" data-aos="fade-up">
         <h2 id="timeline-title">Build Timeline</h2>
@@ -281,7 +275,6 @@
       </div>
     </section>
 
-    <!-- Central GitHub link -->
     <section class="section" data-aos="fade-up" data-aos-delay="200" style="text-align:center;">
       <a class="btn" href="https://github.com/isaacwalsham" target="_blank" rel="noopener">View All Projects on GitHub</a>
     </section>
