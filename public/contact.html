@@ -5,25 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Contact — Isaac Walsham</title>
 
-  <link rel="stylesheet" href="./style.css?v=live-fix-4" />
+  <link rel="stylesheet" href="./style.css" />
   <link rel="preconnect" href="https://unpkg.com" crossorigin>
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
-  <script defer src="./script.js?v=live-fix-4"></script>
+  <script defer src="./script.js"></script>
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
   <header>
-    <nav class="navbar" role="navigation" aria-label="Primary">
-      <div class="logo">Isaac Walsham</div>
-      <button class="toggle-btn" aria-label="Open menu" aria-expanded="false" aria-controls="primary-nav">&#9776;</button>
-      <ul id="primary-nav" class="nav-links">
+    <nav class="navbar" role="navigation" aria-label="Main">
+      <a class="logo" href="index.html">Isaac Walsham</a>
+
+      <ul id="primary-nav" class="nav-links" aria-label="Primary">
         <li><a href="index.html">Home</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="projects.html">Projects</a></li>
         <li><a href="cv.html">CV</a></li>
-        <li><a href="contact.html" class="active">Contact</a></li>
-        <li><a href="admin.html">Admin</a></li>
+        <li><a class="active" href="contact.html">Contact</a></li>
+        <li><a href="/admin">Admin</a></li>
       </ul>
-      <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+
+      <button class="theme-toggle" type="button" aria-label="Switch theme">🌙</button>
+      <button class="toggle-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="primary-nav">&#9776;</button>
     </nav>
   </header>
 
@@ -33,34 +37,33 @@
         <h1>Contact Me</h1>
         <p class="section-subtitle">Have a question or opportunity? Drop me a message — I’ll reply by email.</p>
       </div>
-  <form
-    class="card contact-form"
-    name="contact"
-    method="POST"
-    action="/success.html"
-    data-netlify="true"
-    netlify-honeypot="bot-field"
-    enctype="multipart/form-data"
-  >
-    <div class="form-grid">
-    <input type="hidden" name="form-name" value="contact" />
-    <p style="display:none">
-      <label>Don’t fill this out: <input name="bot-field" /></label>
-    </p>
+      <form
+        class="card contact-form"
+        name="contact"
+        method="POST"
+        action="/success.html"
+        data-netlify="true"
+        netlify-honeypot="bot-field"
+        enctype="multipart/form-data"
+      >
+        <div class="form-grid">
+          <input type="hidden" name="form-name" value="contact" />
+          <p style="display:none">
+            <label>Don’t fill this out: <input name="bot-field" /></label>
+          </p>
 
-
-    <label>Name <input type="text" name="name" required></label>
-    <label>Email <input type="email" name="email" required></label>
-    <label>Subject <input type="text" name="subject"></label>
-    <label>Message <textarea name="message" required></textarea></label>
-    <label>Attachment (optional) <input type="file" name="attachment" /></label>
-    <div class="consent-row">
-      <input type="checkbox" id="consent" name="consent" value="yes" required>
-      <label for="consent">I consent to you storing my submitted information so you can respond to my enquiry, and to being contacted about this request.</label>
-    </div>
-    <button type="submit" class="btn">Send</button>
-    </div>
-  </form>
+          <label>Name <input type="text" name="name" required></label>
+          <label>Email <input type="email" name="email" required></label>
+          <label>Subject <input type="text" name="subject"></label>
+          <label>Message <textarea name="message" required></textarea></label>
+          <label>Attachment (optional) <input type="file" name="attachment" /></label>
+          <div class="consent-row">
+            <input type="checkbox" id="consent" name="consent" value="yes" required>
+            <label for="consent">I consent to you storing my submitted information so you can respond to my enquiry, and to being contacted about this request.</label>
+          </div>
+          <button type="submit" class="btn">Send</button>
+        </div>
+      </form>
     </div>
   </main>
 
