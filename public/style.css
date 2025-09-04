@@ -63,6 +63,9 @@ header {
   border-bottom: 1px solid var(--clr-border);
   backdrop-filter: saturate(140%) blur(8px);
   background: color-mix(in srgb, var(--clr-bg) 90%, transparent);
+  position: sticky;
+  top: 0;
+  z-index: 1300;
 }
 
 .stats-header {
@@ -77,7 +80,16 @@ header {
 .navbar {
   display: flex; justify-content: space-between; align-items: center;
   max-width: 1200px; margin: auto; padding: 1rem;
+  min-height: 56px;
 }
+
+.logo {
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--clr-text);
+}
+.logo:visited { color: var(--clr-text); }
+.logo:hover { text-decoration: none; color: var(--clr-text); }
 
 .nav-links { list-style: none; display: flex; gap: 1.5rem; }
 .nav-links a {
@@ -90,8 +102,22 @@ header {
 }
 
 .toggle-btn {
-  display: none; background: none; border: none;
-  font-size: 1.5rem; cursor: pointer;
+  display: none;
+  background: transparent;
+  border: 1px solid var(--clr-border);
+  color: var(--clr-text);
+  border-radius: 10px;
+  padding: .45rem .6rem;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.toggle-btn:hover {
+  background: color-mix(in srgb, var(--clr-primary) 18%, transparent);
+}
+.toggle-btn:focus-visible {
+  outline: 2px solid var(--clr-accent);
+  outline-offset: 2px;
 }
 
 .theme-toggle {
@@ -187,7 +213,6 @@ header {
 }
 .contact-form input::placeholder, .contact-form textarea::placeholder { color: var(--clr-muted); }
 
-/* Contact page layout & centering fixes */
 .contact-section .card.contact-form,
 form.contact-form {
   max-width: 900px;
@@ -204,7 +229,6 @@ form.contact-form label { grid-column: span 2; }
 form.contact-form textarea { grid-column: 1 / -1; }
 form.contact-form button { grid-column: 1 / -1; }
 
-/* Consent row alignment */
 .contact-form .consent-row {
   display: grid;
   grid-template-columns: auto 1fr;
@@ -213,7 +237,6 @@ form.contact-form button { grid-column: 1 / -1; }
 }
 .contact-form .consent-row input[type="checkbox"] { margin-top: 0.2rem; }
 
-/* Single column on narrower viewports for consistency */
 @media (max-width: 980px) {
   form.contact-form { grid-template-columns: 1fr; }
   form.contact-form label,
@@ -228,16 +251,56 @@ form.contact-form button { grid-column: 1 / -1; }
 }
 
 @media (max-width: 768px) {
-  .toggle-btn { display: block; }
+  .navbar {
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
+    align-items: center;
+    padding: .75rem 1rem;
+    gap: .5rem;
+  }
+
+  .logo { grid-column: 1; }
+  .theme-toggle { grid-column: 3; justify-self: end; }
+  .toggle-btn {
+    display: block;
+    grid-column: 4;
+    justify-self: end;
+    margin-left: auto;
+    line-height: 1;
+  }
+
   .nav-links {
-    position: absolute; top: 60px; right: 0; background: var(--clr-bg);
-    flex-direction: column; width: 200px; padding: 1rem; display: none;
-    border: 1px solid var(--clr-border); border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,.25);
+    position: fixed;
+    top: 60px;
+    right: 12px;
+    left: auto;
+    display: none;
+    flex-direction: column;
+    gap: .5rem;
+    padding: .75rem;
+    background: var(--clr-bg);
+    border: 1px solid var(--clr-border);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.25);
+    z-index: 1400;
+    width: clamp(220px, 85vw, 360px);
+    pointer-events: auto;
   }
   .nav-links.open { display: flex; }
+
+  .nav-links a {
+    width: 100%;
+    padding: .9rem 1rem;
+    border-radius: 10px;
+  }
+
+  .section { padding: 1.25rem 1rem; }
+  .cards { grid-template-columns: 1fr; gap: 1rem; }
+  .hero { padding: 2.5rem 1rem; }
 }
 
-/* Contact page – hard centering + width */
+body.nav-open { overflow: hidden; }
+
 .contact-section .contact-wrap {
   max-width: 920px;
   margin-left: auto;
@@ -252,29 +315,25 @@ form.contact-form {
   margin-right: auto !important;
 }
 
-/* Contact form layout: single, centered column for cleaner balance */
 form.contact-form {
   display: grid;
   gap: 0.9rem;
-  grid-template-columns: 1fr; /* one column to match markup (labels and inputs are separate items) */
-  max-width: 760px;           /* slightly narrower so the card doesn’t feel too wide */
+  grid-template-columns: 1fr;
+  max-width: 760px;
 }
-/* Make each row span the full width and keep text left-aligned inside the form */
+
 form.contact-form label,
 form.contact-form input,
 form.contact-form textarea,
 form.contact-form .consent-row,
 form.contact-form button { grid-column: 1 / -1; text-align: left; }
 
-/* Button sizing and alignment */
 form.contact-form button { width: fit-content; padding: 0.85rem 1.6rem; }
 
-/* On very wide screens, allow a touch more width but keep single column for consistency */
 @media (min-width: 1200px) {
   form.contact-form { max-width: 800px; }
 }
 
-/* Center content within contact section */
 .contact-section {
   display: flex;
   flex-direction: column;
@@ -282,5 +341,19 @@ form.contact-form button { width: fit-content; padding: 0.85rem 1.6rem; }
   text-align: center;
 }
 
-/* Keep form body left-aligned for readability even when section is centered */
 .contact-section form.contact-form { text-align: left; }
+
+/* Backdrop behind mobile drawer */
+.nav-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.35);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1200;
+  transition: opacity .18s ease;
+}
+.nav-backdrop.show {
+  opacity: 1;
+  pointer-events: auto;
+}
