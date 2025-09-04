@@ -42,10 +42,7 @@ body {
   flex-direction: column;
   font-family: var(--font-body);
   color: var(--clr-text);
-  background:
-    radial-gradient(1200px 600px at 80% -10%, rgba(124,92,255,.18), transparent),
-    radial-gradient(900px 500px at -10% 20%, rgba(34,211,238,.14), transparent),
-    var(--clr-bg);
+  background: var(--clr-bg);
   line-height: 1.6;
 }
 main { flex: 1 0 auto; }
@@ -246,7 +243,7 @@ form.contact-form button { grid-column: 1 / -1; }
 
 .site-footer {
   text-align: center; padding: 1rem;
-  background: linear-gradient(180deg, color-mix(in srgb, var(--clr-bg) 70%, transparent), var(--clr-bg));
+  background: transparent;
   font-size: 0.875rem; border-top: 1px solid var(--clr-border);
 }
 
@@ -356,4 +353,48 @@ form.contact-form button { width: fit-content; padding: 0.85rem 1.6rem; }
 .nav-backdrop.show {
   opacity: 1;
   pointer-events: auto;
+}
+
+/* Normalize page backgrounds across all sections */
+.section,
+.hero,
+.stats,
+.about,
+.projects,
+.contact-section,
+.cv,
+.admin,
+.timeline {
+  background: transparent !important;
+}
+.section:nth-child(even),
+.section:nth-child(odd) { background: transparent !important; }
+.alt-section,
+.light-section,
+.surface-section,
+.section.alt,
+.section.light,
+[data-bg="light"],
+[data-bg="alt"] {
+  background: transparent !important;
+}
+
+/* Force a single, uniform page background */
+html, body, main, #main {
+  background: var(--clr-bg) !important;
+  background-image: none !important;
+}
+
+/* Remove any section-level background layers or pseudo-element bands */
+.section::before, .section::after,
+.hero::before, .hero::after,
+.stats::before, .stats::after,
+.about::before, .about::after,
+.projects::before, .projects::after,
+.contact-section::before, .contact-section::after,
+.cv::before, .cv::after,
+.admin::before, .admin::after,
+.timeline::before, .timeline::after {
+  background: transparent !important;
+  box-shadow: none !important;
 }
