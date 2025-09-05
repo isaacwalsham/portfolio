@@ -1,14 +1,97 @@
+# netlify.toml
+
 [build]
+  # You had this already
   command = ""
   publish = "public"
 
+########################################
+# Caching: never cache HTML; long-cache assets
+########################################
+
+# Never cache HTML (prevents stale app shell & chunk 404s after deploys)
+[[headers]]
+  for = "/"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+
+# If you have other HTML pages in /public, don’t cache them either
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+
+# Long-cache for hashed/static assets (include common folders;
+# harmless if some don’t exist in your build)
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/_astro/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/_next/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+########################################
+# Security headers (sane defaults)
+########################################
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    # Uncomment HSTS once you’re sure HTTPS is solid everywhere:
+    # Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+
+########################################
+# Redirects
+########################################
+
+# Keep your admin rule (specific rules first)
 [[redirects]]
   from = "/admin"
   to = "/admin.html"
   status = 200
 
+# Force HTTP → HTTPS on your domain (covers both apex and www)
 [[redirects]]
-  from = "http://*"
+  from = "http://:domain/*"
+  to = "https://:domain/:splat"
+  status = 301
+  force = true
+  conditions = { Host = ["isaacwalsham.com", "www.isaacwalsham.com"] }
+
+# Canonicalize www → apex (remove if you prefer www)
+[[redirects]]
+  from = "https://www.isaacwalsham.com/*"
   to = "https://isaacwalsham.com/:splat"
   status = 301
   force = true
+
+########################################
+# SPA fallback (ONLY if your site is a single-page app)
+# If your site is multi-page static (real .html for each route), delete this block.
+########################################
+# [[redirects]]
+#   from = "/*"
+#   to = "/index.html"
+#   status = 200
