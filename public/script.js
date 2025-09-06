@@ -1,33 +1,43 @@
 (function () {
-  // ---- Theme toggle / persistence ----
   const root = document.documentElement;
-  const storedTheme = localStorage.getItem('theme');
-  if (storedTheme === 'light') root.setAttribute('data-theme', 'light');
-  else if (storedTheme === 'dark') root.removeAttribute('data-theme');
+  const THEME_KEY = 'theme';
+  const storedTheme = localStorage.getItem(THEME_KEY);
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+  const initialTheme = storedTheme || (prefersDark ? 'dark' : 'light');
+  root.setAttribute('data-theme', initialTheme);
 
   const themeBtn = document.querySelector('.theme-toggle');
 
   const setThemeIcon = () => {
     if (!themeBtn) return;
-    const isLight = root.getAttribute('data-theme') === 'light';
-    themeBtn.textContent = isLight ? '☀️' : '🌙'; // show current mode (sun in light, moon in dark)
-    themeBtn.setAttribute('aria-label', isLight ? 'Switch to dark mode' : 'Switch to light mode');
+    const isDark = root.getAttribute('data-theme') === 'dark';
+    themeBtn.textContent = isDark ? '☀️' : '🌙';
+    themeBtn.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
   };
-  setThemeIcon();
+
+  const applyTheme = (theme, persist = true) => {
+    root.setAttribute('data-theme', theme);
+    if (persist) localStorage.setItem(THEME_KEY, theme);
+    setThemeIcon();
+  };
 
   if (themeBtn) {
     themeBtn.addEventListener('click', () => {
-      const isLight = root.getAttribute('data-theme') === 'light';
-      if (isLight) {
-        root.removeAttribute('data-theme');          // go to dark
-        localStorage.setItem('theme', 'dark');
-      } else {
-        root.setAttribute('data-theme', 'light');     // go to light
-        localStorage.setItem('theme', 'light');
-      }
-      setThemeIcon();
+      const current = root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+      const next = current === 'dark' ? 'light' : 'dark';
+      applyTheme(next);
     });
   }
+
+  if (!storedTheme && window.matchMedia) {
+    const mq = window.matchMedia('(prefers-color-scheme: dark)');
+    const onChange = (e) => applyTheme(e.matches ? 'dark' : 'light', false);
+    if (typeof mq.addEventListener === 'function') mq.addEventListener('change', onChange);
+    else if (typeof mq.addListener === 'function') mq.addListener(onChange);
+  }
+
+  setThemeIcon();
 
   const $ = (sel, ctx = document) => ctx.querySelector(sel);
   const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
@@ -63,50 +73,36 @@
     };
     const toggleMenu = () => (nav.classList.contains('open') ? closeMenu() : openMenu());
 
-    // Toggle on button click
     toggleBtn.addEventListener('click', toggleMenu);
 
-    // Close when tapping a link inside the menu and navigate
     nav.addEventListener('click', (e) => {
       const link = e.target && e.target.closest('a[href]');
       if (!link) return;
-      e.preventDefault();
-      e.stopPropagation();
       closeMenu();
-      window.location.href = link.href;
     });
 
-    // Close on ESC
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') closeMenu();
     });
 
-    // Close when clicking outside the menu/burger
     document.addEventListener('click', (e) => {
       if (!nav.classList.contains('open')) return;
+      const onBackdrop = e.target.closest('.nav-backdrop');
       const insideNav = e.target.closest('.nav-links');
       const onToggle = e.target.closest('.toggle-btn');
-      if (!insideNav && !onToggle) closeMenu();
+      if (onBackdrop || (!insideNav && !onToggle)) closeMenu();
     });
 
-    document.addEventListener('click', (e) => {
-      const bd = e.target.closest('.nav-backdrop');
-      if (bd) closeMenu();
-    });
-
-    // Close when resizing above mobile breakpoint
     window.addEventListener('resize', () => {
       if (window.innerWidth > 768) closeMenu();
     });
   }
 
-  // ---- Footer year ----
   const yearEl = $('#year');
   if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // ---- Skill bars reveal ----
   const bars = $$('.bar');
   if (bars.length) {
     const onReveal = (entry, obs) => {
@@ -137,7 +133,6 @@
     }
   }
 
-  // ---- Stats counter animation ----
   const counters = $$('[data-counter] [data-count]');
   if (counters.length) {
     const animateCount = (el) => {
@@ -185,9 +180,12 @@
     }
   }
 
-  // ---- AOS init ----
   if (window.AOS && typeof window.AOS.init === 'function') {
-    try { window.AOS.init(); } catch {}
+    try {
+      window.AOS.init({
+        disable: () => window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+      });
+    } catch {}
   }
 
   (() => {
@@ -210,8 +208,14 @@
       }
     };
 
-    links.forEach((a) => a.classList.remove('active'));
+    links.forEach((a) => {
+      a.classList.remove('active');
+      a.removeAttribute('aria-current');
+    });
     const match = links.find((a) => normalize(a.getAttribute('href')) === current.toLowerCase());
-    if (match) match.classList.add('active');
+    if (match) {
+      match.classList.add('active');
+      match.setAttribute('aria-current', 'page');
+    }
   })();
 })();
